@@ -310,14 +310,112 @@ body{overflow-x:hidden}
 @keyframes sendSpin{to{transform:rotate(360deg)}}
 .thinking{min-height:50px}.thinking .tx{min-width:0}
 .thinking .msg{box-shadow:0 16px 32px rgba(0,0,0,.32),0 0 26px rgba(242,163,58,.09)}
-.stream{min-height:28px}
+/* ===== v5: smoother chat + compact send control ===== */
+.bar .btn{min-width:44px !important;width:44px;height:44px;padding:0 !important;border-radius:50%;font-size:0;display:grid;place-items:center;box-shadow:0 5px 14px rgba(242,163,58,.28),inset 0 1px 0 rgba(255,255,255,.55);transition:transform .16s ease,box-shadow .16s ease,filter .16s ease}
+.bar .btn::after{content:"";display:block;width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:9px solid #1d1330;transform:translateX(1px) rotate(-8deg);filter:drop-shadow(0 1px 0 rgba(255,255,255,.25))}
+.bar .btn:hover:not(:disabled){transform:translateY(-1px) scale(1.035);box-shadow:0 8px 20px rgba(242,163,58,.36),inset 0 1px 0 rgba(255,255,255,.65);filter:brightness(1.05)}
+.bar .btn:active:not(:disabled){transform:scale(.94);box-shadow:0 3px 9px rgba(242,163,58,.25)}
+.bar .btn.busy{min-width:44px !important;width:44px;font-size:0;cursor:wait}
+.bar .btn.busy::before{width:16px;height:16px;border-width:2px}
+.bar .btn.busy::after{display:none}
+.bar .btn:disabled{opacity:.72}
+.stream{min-height:28px;animation:answerIn .22s ease-out}
+.stream::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:3px;vertical-align:-.15em;background:var(--gold);border-radius:2px;animation:typeCaret .7s ease-in-out infinite}
+@keyframes typeCaret{0%,100%{opacity:.2;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+@keyframes answerIn{from{opacity:.55;transform:translateY(3px)}to{opacity:1;transform:none}}
+.thinking{transition:opacity .18s ease,transform .18s ease}.thinking.isLeaving{opacity:0;transform:translateY(-3px)}
+.bot.md p{animation:lineReveal .18s ease-out both}
+@keyframes lineReveal{from{opacity:.65;transform:translateY(2px)}to{opacity:1;transform:none}}
 .dis{position:relative;z-index:2}
 .how div{will-change:transform}
 @media (max-width:820px){
  #space3d{opacity:.72}.hero::before{inset:-40px -20px 0}.panel::before{display:none}.chat{height:min(70vh,620px);min-height:500px}.log{padding:18px 14px}.chips{padding-inline:14px}.bar{padding:12px 14px 16px}.msg{font-size:16px;line-height:1.62}.side{padding:22px}
 }
 @media (max-width:560px){#space3d{opacity:.58}.chat{height:560px;min-height:0}.bar .btn{min-width:82px;padding-inline:15px}.bar input{padding:12px 17px}.gp{backdrop-filter:blur(7px)} }
-@media (prefers-reduced-motion:reduce){#space3d{display:none}.panel::before{animation:none}.me:hover,.bot:hover{transform:none}}
+@media (max-width:820px){
+  html{scroll-behavior:smooth}
+  body{overflow-x:hidden}
+  .wrap{width:100%;max-width:100%;overflow:clip}
+  .panel,.side,.chat{max-width:100%;min-width:0}
+  .chat{contain:layout paint}
+  .log{scroll-behavior:smooth;touch-action:pan-y}
+  .bar input{-webkit-appearance:none}
+  .bar .btn{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+}
+@media (max-width:560px){
+  body::before{opacity:.75}
+  .orbs i{animation-duration:18s}
+  .panel,.side,.chat{box-shadow:0 18px 45px rgba(0,0,0,.42),0 0 35px rgba(122,92,255,.12)}
+  .chat{height:min(560px,calc(100dvh - 90px));min-height:420px}
+  .chead{padding:10px 12px}
+  .msg{max-width:94%;font-size:15.5px;line-height:1.58}
+}
+@media (prefers-reduced-motion:reduce){#space3d{display:none}.panel::before{animation:none}.me:hover,.bot:hover{transform:none}.log{scroll-behavior:auto}}
+
+/* ===== v6: premium ChatGPT-style send button ===== */
+.bar .btn{
+  flex:0 0 46px !important;
+  width:46px !important;
+  min-width:46px !important;
+  height:46px !important;
+  padding:0 !important;
+  border:1px solid rgba(255,220,145,.65) !important;
+  border-radius:50% !important;
+  font-size:0 !important;
+  display:grid !important;
+  place-items:center !important;
+  background:linear-gradient(145deg,#ffd985 0%,#f2aa45 48%,#d9782d 100%) !important;
+  box-shadow:0 7px 18px rgba(242,163,58,.28),inset 0 1px 0 rgba(255,255,255,.72),inset 0 -2px 5px rgba(113,51,11,.18) !important;
+  transform:none;
+  transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .16s ease,filter .16s ease !important;
+}
+.bar .btn::after{
+  content:"" !important;
+  display:block !important;
+  width:19px !important;
+  height:19px !important;
+  background:#17132f !important;
+  clip-path:polygon(3% 45%,97% 3%,58% 97%,45% 60%,3% 45%,45% 55%,97% 3%,45% 60%) !important;
+  transform:translate(1px,0) !important;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.18)) !important;
+  border:0 !important;
+  margin:0 !important;
+}
+.bar .btn:hover:not(:disabled){
+  transform:translateY(-1px) scale(1.045) !important;
+  filter:brightness(1.04) saturate(1.05) !important;
+  box-shadow:0 10px 24px rgba(242,163,58,.38),inset 0 1px 0 rgba(255,255,255,.82),inset 0 -2px 5px rgba(113,51,11,.16) !important;
+}
+.bar .btn:active:not(:disabled){
+  transform:scale(.94) !important;
+  box-shadow:0 4px 10px rgba(242,163,58,.25),inset 0 2px 5px rgba(113,51,11,.2) !important;
+}
+.bar .btn.busy{
+  flex-basis:46px !important;
+  width:46px !important;
+  min-width:46px !important;
+  cursor:wait;
+}
+.bar .btn.busy::before{
+  width:16px !important;
+  height:16px !important;
+  border:2px solid rgba(23,19,47,.22) !important;
+  border-top-color:#17132f !important;
+}
+.bar .btn.busy::after{display:none !important}
+@media (max-width:560px){
+  .bar{margin:0 8px 8px;padding:6px 6px 6px 9px;gap:7px;min-height:58px}
+  .bar input{min-width:0;min-height:44px;height:44px;padding:0 12px;font-size:16px}
+  .bar .btn,.bar .btn.busy{flex:0 0 44px !important;width:44px !important;min-width:44px !important;height:44px !important}
+  .bar .btn::after{width:18px !important;height:18px !important;transform:translate(1px,0) !important}
+  .log{scroll-behavior:smooth;overscroll-behavior:contain}
+}
+@media (max-width:380px){
+  .bar{margin-left:6px;margin-right:6px}
+  .bar input{padding-inline:10px}
+  .bar .btn,.bar .btn.busy{flex-basis:42px !important;width:42px !important;min-width:42px !important;height:42px !important}
+  .bar .btn::after{width:17px !important;height:17px !important}
+}
 </style>
 </head>
 <body>
@@ -439,7 +537,14 @@ function inl(x){return x.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace
 function md(t){if(((t.match(/\*\*/g)||[]).length)%2)t+="**";t=t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");var o="",ls=t.split("\n"),li=null;function cl(){if(li){o+="</"+li+">";li=null}}
 ls.forEach(function(l){var m=l.match(/^\s*[-*•]\s+(.*)/),n=l.match(/^\s*\d+[.)]\s+(.*)/),h=l.match(/^#{1,4}\s+(.*)/);if(m||n){var tg=m?"ul":"ol";if(li!==tg){cl();o+="<"+tg+">";li=tg}o+="<li>"+inl(m?m[1]:n[1])+"</li>"}else{cl();if(h)o+="<p><strong>"+inl(h[1])+"</strong></p>";else if(l.trim())o+="<p>"+inl(l)+"</p>"}});cl();return o}
 function typer(out){var tgt="",n=0,tm=null,done=null,fin=false;
-function tick(){var b=tgt.length-n;if(b<=0){tm=null;if(fin&&done)done();return}var st=b>420?12:b>260?7:b>120?4:b>40?2:1;n+=st;out.innerHTML=md(tgt.slice(0,n));log.scrollTop=log.scrollHeight;var c=tgt.charAt(n-1);tm=setTimeout(tick,/[.!?।]/.test(c)?170:/[,;:]/.test(c)?80:c==="\n"?120:17)}
+function nextCut(){if(n>=tgt.length)return tgt.length;var max=Math.min(tgt.length,n+24),i=n;while(i<max&&tgt.charAt(i)!==" ")i++;if(i<max)return i+1;return max}
+function tick(){if(n>=tgt.length){tm=null;if(fin&&done)done();return}
+ var cut=nextCut();
+ n=cut;
+ out.innerHTML=md(tgt.slice(0,n));
+ log.scrollTop=log.scrollHeight;
+ var c=tgt.charAt(n-1),delay=/[.!?।]/.test(c)?110:/[,;:]/.test(c)?55:c==="\n"?75:28;
+ tm=setTimeout(tick,delay)}
 return{set:function(t){out.classList.add("md");tgt=t;if(!tm)tick()},finish:function(){fin=true;return new Promise(function(r){done=r;if(!tm)tick()})},cancel:function(){clearTimeout(tm);tm=null;out.classList.remove("md")}}}
 function think(o){o.classList.add("thinking");o.innerHTML='<span class="orbw"><i class="ring"></i><b>ॐ</b></span><span class="tx"></span><span class="d3"><i></i><i></i><i></i></span>';var tx=o.querySelector(".tx"),i=0;function nx(){tx.textContent=T("th"+(i%5+1));tx.style.animation="none";void tx.offsetWidth;tx.style.animation="";i++}nx();var id=setInterval(nx,2200);return{stop:function(){clearInterval(id);o.classList.remove("thinking")}}}
 var K={"th1": ["Reading your planetary positions…", "ग्रहों की स्थिति देख रहा हूँ…", "Graho ki sthiti dekh raha hoon…"], "th2": ["Opening the houses of your kundli…", "कुंडली के भाव खोल रहा हूँ…", "Kundli ke bhav khol raha hoon…"], "th3": ["Matching nakshatra and dasha…", "नक्षत्र और दशा मिला रहा हूँ…", "Nakshatra aur dasha mila raha hoon…"], "th4": ["Consulting the Parashari sutras…", "पराशरी सूत्रों से विचार कर रहा हूँ…", "Parashari sutron se vichar kar raha hoon…"], "th5": ["Finding the right remedy…", "सही उपाय खोज रहा हूँ…", "Sahi upay khoj raha hoon…"], "stat": ["Online · Vedic Jyotish AI", "ऑनलाइन · वैदिक ज्योतिष AI", "Online · Vedic Jyotish AI"],"cta": ["Ask your Kundli", "कुंडली पूछिए", "Kundli puchiye"], "h1": ["Talk straight to the <em>stars</em>, in your language.", "सितारों से <em>सीधी</em> बात, अपनी भाषा में।", "Sitaron se <em>seedhi</em> baat, apni bhasha mein."], "sub": ["Share your birth date, time and place. Mahatma answers from your kundli, rashi, nakshatra and dasha using Vedic astrology, in English, Hindi or Hinglish.", "जन्म तिथि, समय और स्थान बताइए। महात्मा आपकी कुंडली, राशि, नक्षत्र और दशा के आधार पर वैदिक ज्योतिष से उत्तर देगा, हिन्दी, अंग्रेज़ी या हिंग्लिश में।", "Janm tithi, samay aur sthan batayiye. Mahatma aapki kundli, rashi, nakshatra aur dasha ke hisab se Vedic jyotish ke jawab dega, Hindi ya Hinglish mein."], "start": ["Start chat", "चैट शुरू कीजिए", "Chat shuru kijiye"], "t1": ["Vedic (Parashari) astrology", "वैदिक (पराशरी) ज्योतिष", "Vedic (Parashari) jyotish"], "t2": ["English + Hindi + Hinglish", "हिन्दी + अंग्रेज़ी + हिंग्लिश", "Hindi + English + Hinglish"], "t3": ["Free chat", "निःशुल्क चैट", "Free chat"], "sh": ["Your birth chart", "आपकी जन्म कुंडली", "Aapki janm kundli"], "sp": ["The more accurate the details, the better the answer.", "जितनी सही जानकारी, उतना सही उत्तर।", "Jitni sahi jaankari, utna sahi jawab."], "ln": ["Name", "नाम", "Naam"], "ld": ["Date of birth", "जन्म तिथि", "Janm tithi"], "lt": ["Time of birth", "जन्म समय", "Janm samay"], "lp": ["Place of birth", "जन्म स्थान", "Janm sthan"], "pn": ["e.g. Aarav Sharma", "जैसे: आरव शर्मा", "Jaise: Aarav Sharma"], "pp": ["e.g. Greater Noida, UP", "जैसे: ग्रेटर नोएडा, उ.प्र.", "Jaise: Greater Noida, UP"], "pq": ["Type your question...", "अपना प्रश्न लिखिए...", "Apna sawal likhiye..."], "send": ["Send", "भेजिए", "Bhejiye"], "c1": ["What does my kundli say about career?", "मेरी कुंडली करियर के बारे में क्या कहती है?", "Meri career kundli kya kehti hai?"], "c2": ["When are the marriage yogas?", "विवाह के योग कब हैं?", "Vivah kab ke yog hain?"], "c3": ["What is my rashi and nakshatra?", "मेरी राशि और नक्षत्र क्या है?", "Meri rashi aur nakshatra kya hai?"], "c4": ["How will today go?", "आज का दिन कैसा रहेगा?", "Aaj ka din kaisa rahega?"], "c5": ["Suggest a remedy", "कोई उपाय बताइए", "Koi upay batayiye"], "hello": ["Namaste! I'm Mahatma. Fill in your birth details first, then ask me anything.", "नमस्ते! मैं महात्मा हूँ। पहले अपनी जन्म जानकारी भरिए, फिर कोई भी प्रश्न पूछिए।", "Namaste! Main Mahatma hoon. Pehle apni janm jaankari bharein, phir koi bhi sawal puchiye."], "w": ["Three steps to an answer", "तीन कदम में उत्तर", "Teen kadam mein jawab"], "h1s": ["Birth details", "जन्म विवरण", "Janm vivaran"], "p1": ["Enter date, time and place. Not sure of the time? Ask anyway.", "तिथि, समय और स्थान भरिए। समय न पता हो तब भी पूछ सकते हैं।", "Tithi, samay aur sthan bharein. Samay pata na ho to bhi puchh sakte hain."], "h2s": ["Ask away", "प्रश्न पूछिए", "Sawal puchiye"], "p2": ["Career, marriage, wealth, health, mahadasha or a good muhurat, anything.", "करियर, विवाह, धन, स्वास्थ्य, महादशा या शुभ मुहूर्त, कुछ भी।", "Career, vivah, dhan, swasthya, mahadasha ya shubh muhurat, kuch bhi."], "h3s": ["Straight answers", "सीधा उत्तर", "Seedha jawab"], "p3": ["Plain-language readings and remedies based on planets and houses.", "ग्रहों और भावों के आधार पर सरल भाषा में व्याख्या और उपाय।", "Graho aur bhavon ke aadhar par saral bhasha mein vyakhya aur upay."], "foot": ["© askmahatma.in · For astrological guidance only. Not a substitute for medical, legal or financial advice.", "© askmahatma.in · यह केवल ज्योतिषीय मार्गदर्शन है। चिकित्सा, कानूनी या वित्तीय सलाह का विकल्प नहीं।", "© askmahatma.in · Jyotish margdarshan ke liye hai. Medical, legal ya financial salah ka vikalp nahi hai."], "e1": ["Please allow permission to run the chat, then reload and tap Allow.", "चैट चलाने के लिए अनुमति देना ज़रूरी है। पेज दोबारा खोलकर 'Allow' दबाइए।", "Chat chalane ke liye permission dena zaroori hai. Page dobara kholkar 'Allow' dabayiye."], "e2": ["Please try again in a moment.", "थोड़ी देर बाद दोबारा कोशिश कीजिए।", "Thodi der baad dobara koshish kijiye."], "e3": ["Couldn't get an answer right now. Please try again.", "अभी उत्तर नहीं आ पाया। कृपया दोबारा कोशिश कीजिए।", "Abhi jawab nahi aa paaya. Kripya dobara koshish kijiye."]},NK="अश्विनी भरणी कृत्तिका रोहिणी मृगशिरा आर्द्रा पुनर्वसु पुष्य आश्लेषा मघा पूर्वाफाल्गुनी उत्तराफाल्गुनी हस्त चित्रा स्वाति विशाखा अनुराधा ज्येष्ठा मूल पूर्वाषाढ़ा उत्तराषाढ़ा श्रवण धनिष्ठा शतभिषा पूर्वाभाद्रपद उत्तराभाद्रपद रेवती".split(" ");
