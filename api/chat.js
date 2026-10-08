@@ -2,7 +2,17 @@
 // Ye file "kitchen" hai: website ka sawal leti hai, Gemini AI ko bhejti hai, jawab wapas deti hai.
 // API key yahan code me NAHI likhni. Wo Vercel ke Environment Variables me rahegi.
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
+// Ek model busy ho to agla try hoga (order me)
+const MODELS = [
+  process.env.GEMINI_MODEL,
+  "gemini-flash-latest",
+  "gemini-2.5-flash",
+  "gemini-2.5-flash-lite",
+  "gemini-flash-lite-latest",
+].filter(function (m, i, arr) { return m && arr.indexOf(m) === i; });
+
+// In status codes par agla model try karenge (busy / limit / model nahi mila)
+const RETRY_STATUS = [404, 429, 500, 502, 503, 504];
 
 function clip(s, n) {
   return String(s == null ? "" : s).slice(0, n);
@@ -49,27 +59,46 @@ module.exports = async function handler(req, res) {
       (kundli ? clip(kundli, 4000) : "UPLABDH NAHI - user ne janm vivaran poora nahi diya.") +
       "\n\nAaj ki date: " + new Date().toISOString().slice(0, 10);
 
-    const url =
-      "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent";
-
-    const r = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: systemText }] },
-        contents,
-        generationConfig: { temperature: 0.7, maxOutputTokens: 2048 },
-      }),
+    const reqBody = JSON.stringify({
+      systemInstruction: { parts: [{ text: systemText }] },
+      contents,
+      generationConfig: { temperature: 0.7, maxOutputTokens: 2048 },
     });
 
-    const data = await r.json().catch(() => ({}));
+    let data = {};
+    let lastStatus = 0;
+    let lastMsg = "";
+    let ok = false;
 
-    if (r.status === 429) {
-      return res.status(429).json({ error: "rate_limited" });
+    for (const model of MODELS.slice(0, 4)) {
+      const url =
+        "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent";
+      const ctrl = new AbortController();
+      const timer = setTimeout(function () { ctrl.abort(); }, 12000);
+      try {
+        const r = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+          body: reqBody,
+          signal: ctrl.signal,
+        });
+        clearTimeout(timer);
+        data = await r.json().catch(function () { return {}; });
+        lastStatus = r.status;
+        lastMsg = (data.error && data.error.message) || "";
+        if (r.ok) { ok = true; break; }
+        console.error("Gemini error (" + model + "):", r.status, JSON.stringify(data).slice(0, 300));
+        if (RETRY_STATUS.indexOf(r.status) === -1) break; // key galat jaisi dikkat: aage try bekaar
+      } catch (err) {
+        clearTimeout(timer);
+        lastMsg = "timeout/network (" + model + ")";
+        console.error("Fetch failed (" + model + "):", err && err.message);
+      }
     }
-    if (!r.ok) {
-      console.error("Gemini error:", r.status, JSON.stringify(data).slice(0, 500));
-      return res.status(502).json({ error: (data.error && data.error.message) || "AI error" });
+
+    if (!ok) {
+      if (lastStatus === 429) return res.status(429).json({ error: "rate_limited" });
+      return res.status(502).json({ error: lastMsg || "AI abhi busy hai, thodi der baad try karo" });
     }
 
     const parts = (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) || [];
