@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#07091f">
 <title>AskMahatma – Apni Kundli se baat kijiye</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0d0f2e;--bg2:#161a44;--ink:#efe8d8;--mute:#a7a6c4;--gold:#f2a33a;--rose:#e0567f;--line:rgba(242,163,58,.25);--card:rgba(255,255,255,.05);
@@ -451,11 +452,79 @@ body{overflow-x:hidden;-webkit-tap-highlight-color:transparent}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 }
+
+/* ===== v7: clean CTA, professional chat, 3D graha sky, extra smoothness ===== */
+.orbs{display:none}
+#space3d{opacity:1}
+@media (max-width:820px){#space3d{opacity:.85}body::after{display:none}}
+#chat{scroll-margin-top:16px}
+.hero>div:first-child{position:relative;z-index:3}
+.hero h1,.hero p{text-shadow:0 2px 22px rgba(7,9,31,.9)}
+
+/* hero "enter" button */
+.cta{position:relative;display:inline-flex;align-items:center;gap:14px;min-height:56px;padding:10px 10px 10px 28px;border-radius:999px;font:600 17px/1 "Hind",system-ui,sans-serif;letter-spacing:.2px;color:#1a1230;text-decoration:none;background:linear-gradient(135deg,#ffe3a6 0%,#f5b04a 52%,#ee7f55 100%);box-shadow:0 12px 32px rgba(245,176,74,.34),inset 0 1px 0 rgba(255,255,255,.7);overflow:hidden;isolation:isolate;-webkit-tap-highlight-color:transparent;touch-action:manipulation;cursor:pointer;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease}
+.cta::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);transform:translateX(-130%);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.cta svg{flex:none;width:38px;height:38px;padding:10px;border-radius:50%;background:#1a1230;color:#ffd37f;transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(245,176,74,.45),inset 0 1px 0 rgba(255,255,255,.8)}
+.cta:hover::before{transform:translateX(130%)}
+.cta:hover svg{transform:translateX(3px)}
+.cta:active{transform:scale(.97);transition-duration:.1s}
+.cta:focus-visible{outline:2px solid #fff;outline-offset:4px}
+
+/* chat: calm, professional */
+.panel::before,.bot::after{display:none!important}
+.me:hover,.bot:hover{transform:none!important}
+.bot.md p{animation:none!important}
+.log{scroll-behavior:auto!important}
+.side,.chat{border-radius:24px;border:1px solid rgba(245,176,74,.26);background:linear-gradient(180deg,rgba(24,27,80,.9),rgba(10,12,40,.95));box-shadow:0 24px 60px rgba(0,0,0,.42)}
+.chat{overflow:hidden}
+.chead{margin:0;min-height:68px;padding:14px 18px;gap:12px;border:0;border-bottom:1px solid rgba(245,176,74,.18);border-radius:0;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}
+.chead .av,.row .av{animation:none;filter:none;box-shadow:0 0 0 2px rgba(245,176,74,.35)}
+.chead .av{border-radius:50%}
+.cn{font-size:20px;letter-spacing:.2px}
+.cs{font-size:13px}
+.cbadge{opacity:.55;text-shadow:none;font-size:22px}
+.log{padding:20px 20px 8px;gap:14px;background:radial-gradient(ellipse at 50% 0,rgba(122,92,255,.12),transparent 60%)}
+.msg{font-size:15.5px;line-height:1.7;padding:12px 16px}
+.bot{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-left:1px solid rgba(255,255,255,.1);border-radius:6px 18px 18px 18px;box-shadow:none;color:var(--ink)}
+.me{background:linear-gradient(135deg,#7a5cff,#c23f7a);border:0;border-radius:18px 6px 18px 18px;box-shadow:0 8px 20px rgba(122,92,255,.28);color:#fff}
+.bot .who{font:600 12px "Hind",sans-serif;letter-spacing:.06em;color:var(--gold);margin-bottom:3px}
+.bot strong{color:#ffd58a}
+.chips{padding:0 18px 10px}
+.chip{background:rgba(255,255,255,.05);border:1px solid rgba(245,176,74,.3);border-radius:999px;padding:8px 14px;font-size:14px;box-shadow:none;transition:background .2s,border-color .2s,color .2s,transform .2s}
+.chip:hover{background:rgba(245,176,74,.12);border-color:var(--gold);color:#ffd58a;transform:translateY(-1px);box-shadow:none}
+.bar{margin:6px 14px 10px;padding:6px 6px 6px 16px;gap:8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.06);box-shadow:none}
+.bar:focus-within{border-color:rgba(245,176,74,.75);box-shadow:0 0 0 3px rgba(245,176,74,.14)}
+.bar input{background:transparent!important;box-shadow:none!important;border:0!important;padding:0 6px!important;min-height:44px}
+.bar .btn,.bar .btn.busy{flex:0 0 44px!important;width:44px!important;min-width:44px!important;height:44px!important;padding:0!important;border:0!important;border-radius:50%!important;font-size:0!important;display:grid!important;place-items:center!important;background:linear-gradient(135deg,#ffd98a,#f5b04a 55%,#e0567f)!important;box-shadow:0 6px 16px rgba(245,176,74,.32)!important;transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease!important}
+.bar .btn::after{content:""!important;display:block!important;width:20px!important;height:20px!important;margin:0!important;border:0!important;clip-path:none!important;filter:none!important;transform:translateX(1px)!important;background:#1a1230!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3.4 20.4 21 12 3.4 3.6l-.1 6.5L15 12l-11.7 1.9z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3.4 20.4 21 12 3.4 3.6l-.1 6.5L15 12l-11.7 1.9z'/%3E%3C/svg%3E") center/contain no-repeat}
+.bar .btn.busy::after{display:none!important}
+.bar .btn:hover:not(:disabled){transform:scale(1.07)!important;box-shadow:0 10px 22px rgba(245,176,74,.42)!important}
+.bar .btn:active:not(:disabled){transform:scale(.94)!important}
+.bar .btn:disabled{opacity:.6}
+.dis{background:none}
+@media (max-width:820px){.msg{font-size:15.5px}.bar{margin:6px 10px 10px}.chips{padding:0 12px 10px}}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.cta,.cta svg,.cta::before{transition:none}}
+@media (hover:none){.how div{transition:none}}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* ===== v8: round 3D avatar + polished send button ===== */
+.av,.av.big{border-radius:50%!important;box-shadow:none!important;background:none!important;overflow:visible;animation:none!important;filter:drop-shadow(0 5px 7px rgba(0,0,0,.5)) drop-shadow(0 0 9px rgba(245,176,74,.35))!important}
+.av svg{width:100%;height:100%;display:block;overflow:visible}
+.row .av{width:40px;height:40px}
+.bar .btn,.bar .btn.busy{position:relative!important;background:radial-gradient(circle at 34% 26%,#fff3c8 0%,#ffc45e 36%,#f08c3c 72%,#d9486f 100%)!important;box-shadow:0 8px 18px rgba(240,138,58,.42),inset 0 2px 3px rgba(255,255,255,.75),inset 0 -3px 6px rgba(120,40,20,.38)!important}
+.bar .btn::after{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:22px!important;height:22px!important;margin:0!important;transform:translate(-50%,-50%)!important;background:#2a1208!important;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 19V5M5.5 11.5 12 5l6.5 6.5' fill='none' stroke='%23000' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat!important;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 19V5M5.5 11.5 12 5l6.5 6.5' fill='none' stroke='%23000' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat!important}
+.bar .btn.busy::before{position:absolute!important;left:50%!important;top:50%!important;margin:-9px 0 0 -9px!important;width:18px!important;height:18px!important}
+.bar .btn:hover:not(:disabled){transform:translateY(-1px) scale(1.06)!important}
+.bar .btn:active:not(:disabled){transform:scale(.93)!important}
 </style>
 </head>
 <body>
 <canvas id="stars" aria-hidden="true"></canvas><canvas id="space3d" aria-hidden="true"></canvas>
-<div class="orbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div class="toran" aria-hidden="true"><svg width="100%" height="64"><defs><pattern id="tp" width="46" height="64" patternUnits="userSpaceOnUse"><path d="M0 2Q23 16 46 2" stroke="#f2a33a" stroke-width="1.5" fill="none"/><path d="M23 11Q31 24 23 38Q15 24 23 11Z" fill="#2e9b62"/><circle cx="23" cy="44" r="8" fill="#f59e0b"/><circle cx="23" cy="44" r="5" fill="#ffb627"/><circle cx="23" cy="44" r="2" fill="#ffe08a"/><circle cx="23" cy="58" r="3" fill="#e0567f"/></pattern></defs><rect width="100%" height="64" fill="url(#tp)"/></svg></div>
 <div class="wrap">
 <nav><a class="logo" href="#" aria-label="AskMahatma"><svg class="lg" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lf" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#e0567f"/><stop offset=".5" stop-color="#f2a33a"/><stop offset="1" stop-color="#fff3c4"/></linearGradient><linearGradient id="lp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8fb0"/><stop offset="1" stop-color="#b8325f"/></linearGradient></defs><circle class="lr" cx="24" cy="24" r="22.5" fill="none" stroke="#f2a33a" stroke-width="1.2" stroke-dasharray="1.5 3.5"/><g transform="translate(24 40)" fill="url(#lp)" opacity=".92"><ellipse rx="4" ry="11" transform="rotate(-62) translate(0 -9)"/><ellipse rx="4" ry="11" transform="rotate(62) translate(0 -9)"/><ellipse rx="4.5" ry="12" transform="rotate(-32) translate(0 -9)"/><ellipse rx="4.5" ry="12" transform="rotate(32) translate(0 -9)"/><ellipse rx="4.5" ry="13" transform="translate(0 -9)" fill="#ffc15e"/></g><path class="fl2" d="M24 7C30 15 29 21 24 25C19 21 18 15 24 7Z" fill="url(#lf)"/><path d="M15 28Q24 38 33 28Z" fill="#f2a33a"/></svg><span class="lt"><span class="lw">Ask<b>Mahatma</b></span><small>ॐ ज्योतिष</small></span></a><div class="nr"><div class="lang" role="group" aria-label="Language"><button data-l="en">EN</button><button data-l="hi">हिन्दी</button><button data-l="hg">Hinglish</button></div><a class="nav-cta" href="#chat" data-t="cta">Kundli puchiye</a></div></nav>
@@ -464,7 +533,7 @@ body{overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 <div>
 <h1 data-t="h1">Sitaron se <em>seedhi</em> baat, apni bhasha mein.</h1>
 <p data-t="sub">Janm tithi, samay aur sthan batayiye. Mahatma aapki kundli, rashi, nakshatra aur dasha ke hisab se Vedic jyotish ke jawab dega, Hindi ya Hinglish mein.</p>
-<a class="btn" href="#chat" data-t="start">Chat shuru kijiye</a>
+<a class="cta" id="cta" href="#chat"><span data-t="start">Chat shuru kijiye</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 <div class="trust"><span data-t="t1">Vedic (Parashari) jyotish</span><span data-t="t2">Hindi + Hinglish</span><span data-t="t3">Free chat</span></div>
 </div>
 <div class="stage"><div class="tilt" id="tilt"><svg class="wheel" viewBox="0 0 500 500" role="img" aria-label="Barah rashiyon ka chakra">
@@ -520,36 +589,119 @@ var m=(i*30+15)*Math.PI/180,x=250+203*Math.sin(m),y=250-203*Math.cos(m);
 s+='<text x="'+x+'" y="'+y+'" transform="rotate('+(i*30+15)+' '+x+' '+y+')" text-anchor="middle" dominant-baseline="middle" font-size="20" fill="#efe8d8" font-family="Tiro Devanagari Hindi,serif">'+R[i]+'</text>';}
 ring.innerHTML=s;
 var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
-/* Lightweight procedural 3D space: no image assets, no Three.js, capped DPR and animation work. */
+/* Navagraha 3D sky: real sidereal (Lahiri) positions, geocentric view, canvas only (no libraries) */
 (function(){
- var c=document.getElementById("space3d"),x=c.getContext("2d"),w=0,h=0,dpr=1,visible=true,last=0,raf=0;
- var bodies=[
-  {x:.78,y:.22,r:88,scale:1.0,hue:"gold",rot:0.18,ring:false,cr:7},
-  {x:.13,y:.72,r:54,scale:1.0,hue:"blue",rot:-.11,ring:false,cr:5},
-  {x:.90,y:.70,r:34,scale:1.0,hue:"red",rot:.22,ring:true,cr:3},
-  {x:.34,y:.17,r:24,scale:1.0,hue:"ice",rot:-.28,ring:false,cr:2}
+ var c=document.getElementById("space3d");if(!c)return;
+ var x=c.getContext("2d"),rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+ var TAU=Math.PI*2,w=0,h=0,dpr=1,cx=0,cy=0,Rz=300,u=1,D=4.2,ZR=1.15,lowQ=false,last=0,slow=0,raf=0,t0=0,ready=false;
+ var tp=0,cyw=1,syw=0,cp=1,sp=0,PX=0,PY=0,PF=1,PZ=0;
+ var SPR=192,CC=96,RR=58;
+ var RN=["मेष","वृषभ","मिथुन","कर्क","सिंह","कन्या","तुला","वृश्चिक","धनु","मकर","कुम्भ","मीन"];
+ var G=[
+  {k:"mo",n:"चन्द्र",r:.30,inc:.10,sz:11,rgb:"190,205,255",c:["#ffffff","#e8ecff","#9aa6d8","#262b62"]},
+  {k:"me",n:"बुध",r:.40,inc:-.07,sz:8,rgb:"120,230,160",c:["#f4fff0","#9fe0a8","#3d8f58","#0e3320"]},
+  {k:"ve",n:"शुक्र",r:.50,inc:.06,sz:12,rgb:"255,225,160",c:["#fffdf4","#ffe9b8","#e0b36a","#5e3a14"]},
+  {k:"su",n:"सूर्य",r:.62,inc:0,sz:22,rgb:"255,170,60",sun:1,c:["#fffbe6","#ffd56a","#f08a22","#8a2c08"]},
+  {k:"ma",n:"मंगल",r:.72,inc:-.09,sz:11,rgb:"255,100,70",c:["#ffe6d6","#ee7b55","#a8321f","#3a0f0a"]},
+  {k:"ju",n:"गुरु",r:.82,inc:.07,sz:19,rgb:"255,200,120",bands:1,c:["#fff6e0","#f0c98a","#c8864a","#4c2a14"]},
+  {k:"sa",n:"शनि",r:.91,inc:-.05,sz:16,rgb:"235,215,160",bands:1,ring:1,c:["#fff8e3","#e8d3a0","#b39358","#3e2f14"]},
+  {k:"ra",n:"राहु",r:1.0,inc:.12,sz:11,rgb:"130,100,255",node:1,c:["#d9c8ff","#6c4fd0","#2a1a66","#0a0618"]},
+  {k:"ke",n:"केतु",r:1.0,inc:.12,sz:11,rgb:"255,140,80",node:1,c:["#ffd9c0","#c4683a","#6b2a12","#1a0a05"]}
  ];
- function size(){dpr=Math.min(devicePixelRatio||1,1.5);w=innerWidth;h=innerHeight;c.width=Math.floor(w*dpr);c.height=Math.floor(h*dpr);c.style.width=w+"px";c.style.height=h+"px";x.setTransform(dpr,0,0,dpr,0,0)}
- size();addEventListener("resize",size,{passive:true});
- var io=new IntersectionObserver(function(es){visible=es.some(function(e){return e.isIntersecting})});io.observe(document.querySelector(".hero"));
- function sphere(p,t){
-   var px=p.x*w,py=p.y*h,r=p.r*(w<700?.72:1),ang=t*p.rot*.00005;
-   x.save();x.translate(px,py);
-   if(p.ring){x.save();x.rotate(-.22);x.scale(1,.30);x.strokeStyle="rgba(239,232,216,.25)";x.lineWidth=5;x.beginPath();x.ellipse(0,0,r*1.65,r*.9,0,0,Math.PI*2);x.stroke();x.restore()}
-   var g=x.createRadialGradient(-r*.34,-r*.38,r*.04,0,0,r*1.05);
-   if(p.hue==="gold"){g.addColorStop(0,"#fff8dc");g.addColorStop(.18,"#ffd27a");g.addColorStop(.55,"#d98a2e");g.addColorStop(.82,"#7b3515");g.addColorStop(1,"#170b16")}
-   else if(p.hue==="blue"){g.addColorStop(0,"#d9f3ff");g.addColorStop(.18,"#7bc7e8");g.addColorStop(.5,"#2d6c9c");g.addColorStop(.84,"#102b55");g.addColorStop(1,"#080b20")}
-   else if(p.hue==="red"){g.addColorStop(0,"#ffe1c2");g.addColorStop(.18,"#d87552");g.addColorStop(.52,"#7e302c");g.addColorStop(.84,"#35121e");g.addColorStop(1,"#090718")}
-   else{g.addColorStop(0,"#fff");g.addColorStop(.25,"#c5d8ff");g.addColorStop(.58,"#6475b4");g.addColorStop(.86,"#20244f");g.addColorStop(1,"#08091e")}
-   x.shadowBlur=r*.42;x.shadowColor=p.hue==="gold"?"rgba(242,163,58,.28)":"rgba(100,130,255,.18)";x.fillStyle=g;x.beginPath();x.arc(0,0,r,0,Math.PI*2);x.fill();x.shadowBlur=0;
-   x.save();x.beginPath();x.arc(0,0,r*.985,0,Math.PI*2);x.clip();x.rotate(ang);
-   for(var i=0;i<p.cr*4;i++){var a=i*2.399+1.2,s=.18+((i*37)%70)/100,xx=Math.cos(a)*r*s,yy=Math.sin(a)*r*s,rr=r*(.012+((i*17)%9)/1000);x.fillStyle="rgba(35,20,35,.16)";x.beginPath();x.ellipse(xx,yy,rr*2,rr,0,0,Math.PI*2);x.fill()}
-   x.restore();
-   var shade=x.createLinearGradient(r*.2,-r*.1,r*1.1,r*.35);shade.addColorStop(0,"rgba(255,255,255,0)");shade.addColorStop(.55,"rgba(0,0,0,.06)");shade.addColorStop(1,"rgba(0,0,0,.72)");x.fillStyle=shade;x.beginPath();x.arc(0,0,r,0,Math.PI*2);x.fill();
-   x.restore();
+ var EA={n:"पृथ्वी",sz:9,rgb:"110,190,255",c:["#e0f8ff","#4aa7e0","#1d5fa8","#06183a"],earth:1};
+ var base={},rate={},items=[],i;
+ for(i=0;i<G.length;i++)items.push({t:0,p:G[i],z:0,sx:0,sy:0,f:1});
+ items.push({t:1,p:EA,z:0,sx:0,sy:0,f:1});
+ for(i=0;i<12;i++)items.push({t:2,i:i,z:0,sx:0,sy:0,f:1});
+ function byZ(a,b){return b.z-a.z}
+ function glowSpr(rgb){var s=document.createElement("canvas");s.width=s.height=128;var g=s.getContext("2d"),q=g.createRadialGradient(64,64,0,64,64,64);q.addColorStop(0,"rgba("+rgb+",.85)");q.addColorStop(.28,"rgba("+rgb+",.30)");q.addColorStop(1,"rgba("+rgb+",0)");g.fillStyle=q;g.fillRect(0,0,128,128);return s}
+ function ringArc(g,a0,a1){g.lineCap="round";g.strokeStyle="rgba(232,211,160,.55)";g.lineWidth=7;g.beginPath();g.ellipse(CC,CC+4,92,22,-.33,a0,a1);g.stroke();g.strokeStyle="rgba(200,170,110,.4)";g.lineWidth=4;g.beginPath();g.ellipse(CC,CC+4,76,18,-.33,a0,a1);g.stroke()}
+ function sprite(p){
+  var s=document.createElement("canvas");s.width=s.height=SPR;var g=s.getContext("2d");
+  if(p.ring)ringArc(g,Math.PI,TAU);
+  var q=g.createRadialGradient(CC-20,CC-22,5,CC,CC,RR+4);q.addColorStop(0,p.c[0]);q.addColorStop(.3,p.c[1]);q.addColorStop(.66,p.c[2]);q.addColorStop(1,p.c[3]);
+  g.fillStyle=q;g.beginPath();g.arc(CC,CC,RR,0,TAU);g.fill();
+  g.save();g.beginPath();g.arc(CC,CC,RR,0,TAU);g.clip();
+  if(p.bands){for(var b=-4;b<=4;b++){g.fillStyle="rgba(110,64,28,"+(b%2?.16:.08)+")";g.fillRect(CC-RR,CC+b*11-3,RR*2,6)}}
+  if(p.earth){g.fillStyle="rgba(70,170,90,.8)";[[-18,-10,22,12],[14,6,18,22],[-4,28,14,8],[26,-24,12,8]].forEach(function(a){g.beginPath();g.ellipse(CC+a[0],CC+a[1],a[2],a[3],.6,0,TAU);g.fill()});g.fillStyle="rgba(255,255,255,.35)";g.beginPath();g.ellipse(CC-6,CC-30,26,6,.2,0,TAU);g.fill()}
+  if(p.node){for(var m=0;m<7;m++){g.fillStyle="rgba("+p.rgb+",.10)";g.beginPath();g.ellipse(CC+Math.cos(m*2.1)*24,CC+Math.sin(m*1.7)*22,22,9,m,0,TAU);g.fill()}}
+  var sh=g.createRadialGradient(CC-24,CC-26,10,CC+10,CC+10,RR+16);sh.addColorStop(0,"rgba(0,0,0,0)");sh.addColorStop(.62,"rgba(0,0,10,.22)");sh.addColorStop(1,"rgba(0,0,14,.72)");
+  g.fillStyle=sh;g.fillRect(0,0,SPR,SPR);g.restore();
+  if(p.node){g.strokeStyle="rgba("+p.rgb+",.65)";g.lineWidth=2.5;g.beginPath();g.arc(CC,CC,RR,0,TAU);g.stroke()}
+  if(p.ring)ringArc(g,0,Math.PI);
+  return s}
+ function init(){
+  ready=true;t0=performance.now();
+  var all=G.concat([EA]);all.forEach(function(p){p.spr=sprite(p);p.gl=glowSpr(p.rgb)});
+  var okk=false;
+  try{var J=Date.now()/864e5+2440587.5,a=sidAt(J),b=sidAt(J+1);
+   for(var k in a){var d=b[k]-a[k];d=((d%360)+540)%360-180;base[k]=a[k];rate[k]=d}
+   okk=isFinite(base.su)&&isFinite(base.mo)}catch(e){}
+  if(!okk){var B={su:200,mo:40,ma:130,me:215,ju:70,ve:180,sa:350,ra:15,ke:195},V={su:.9856,mo:13.18,ma:.52,me:1.2,ju:.083,ve:1.1,sa:.034,ra:-.053,ke:-.053};base=B;rate=V}
  }
- function draw(t){raf=0;if(!visible)return;if(t-last<32){raf=requestAnimationFrame(draw);return}last=t;x.clearRect(0,0,w,h);bodies.forEach(function(p){sphere(p,t)});raf=requestAnimationFrame(draw)}
- if(!reduce)raf=requestAnimationFrame(draw);
+ function size(){
+  dpr=Math.min(window.devicePixelRatio||1,lowQ?1:1.5);w=innerWidth;h=innerHeight;
+  c.width=Math.floor(w*dpr);c.height=Math.floor(h*dpr);c.style.width=w+"px";c.style.height=h+"px";x.setTransform(dpr,0,0,dpr,0,0);
+  Rz=w<700?w*.58:Math.min(w*.46,h*1.15,900);u=Math.max(.5,Math.min(1.15,Rz/660));
+  if(rm&&ready&&!raf)raf=requestAnimationFrame(frame)}
+ function cam(yaw,pitch){cyw=Math.cos(yaw);syw=Math.sin(yaw);cp=Math.cos(pitch);sp=Math.sin(pitch)}
+ function proj(a,b,d){var x1=a*cyw+d*syw,z1=-a*syw+d*cyw,y2=b*cp-z1*sp,z2=b*sp+z1*cp,f=D/(D+z2);PX=cx+x1*f*Rz;PY=cy+y2*f*Rz;PF=f;PZ=z2}
+ function onOrbit(r,inc,th,fn){var z0=Math.sin(th)*r;fn(Math.cos(th)*r,-z0*Math.sin(inc),z0*Math.cos(inc))}
+ var XS=[],YS=[],ZS=[];
+ function ring(r,inc,rgb,aB,aF,lw,dash){
+  var n=lowQ?56:96,j,k;
+  for(j=0;j<=n;j++){var th=j/n*TAU,z0=Math.sin(th)*r;proj(Math.cos(th)*r,-z0*Math.sin(inc),z0*Math.cos(inc));XS[j]=PX;YS[j]=PY;ZS[j]=PZ}
+  x.lineWidth=lw;if(dash)x.setLineDash(dash);
+  for(k=0;k<2;k++){x.beginPath();for(j=0;j<n;j++){if(((ZS[j]+ZS[j+1])>0)===(k===0)){x.moveTo(XS[j],YS[j]);x.lineTo(XS[j+1],YS[j+1])}}
+   x.strokeStyle="rgba("+rgb+","+(k?aF:aB)+")";x.stroke()}
+  if(dash)x.setLineDash([])}
+ function dPlanet(it){
+  var p=it.p,d=p.sz*2*u*it.f,da=Math.max(.5,Math.min(1,.78-it.z*.28));
+  x.globalAlpha=da;
+  if(!lowQ){var gs=d*(p.sun?5:2.8);x.globalCompositeOperation="lighter";x.globalAlpha=da*(p.sun?1:.55);x.drawImage(p.gl,it.sx-gs/2,it.sy-gs/2,gs,gs);x.globalCompositeOperation="source-over";x.globalAlpha=da}
+  var ds=SPR*d/(RR*2);x.drawImage(p.spr,it.sx-ds/2,it.sy-ds/2,ds,ds);
+  var fs=Math.max(10.5,12.5*u*Math.min(1.2,it.f));
+  x.font="500 "+fs+"px Hind,'Tiro Devanagari Hindi',sans-serif";x.textAlign="center";x.textBaseline="top";
+  x.lineWidth=3;x.strokeStyle="rgba(7,9,31,.85)";x.fillStyle=p.sun?"#ffe3a0":"rgba(239,232,216,.95)";
+  var ty=it.sy+d*(p.ring?.62:.5)+3;x.strokeText(p.n,it.sx,ty);x.fillText(p.n,it.sx,ty);x.globalAlpha=1}
+ function dLabel(it){
+  var da=Math.max(.3,Math.min(.9,.62-it.z*.3)),fs=Math.max(10,13.5*u*Math.min(1.25,it.f));
+  x.globalAlpha=da;x.font="400 "+fs+"px 'Tiro Devanagari Hindi',Hind,serif";x.textAlign="center";x.textBaseline="middle";
+  x.lineWidth=3;x.strokeStyle="rgba(7,9,31,.8)";x.fillStyle="#f5b04a";x.strokeText(RN[it.i],it.sx,it.sy);x.fillText(RN[it.i],it.sx,it.sy);x.globalAlpha=1}
+ function draw(ts){
+  var sec=rm?8:(ts-t0)/1000,days=sec/1.5,j,it,p,mxx=typeof mx==="number"?mx:0,myy=typeof my==="number"?my:0;
+  var sc=Math.min(1,(window.pageYOffset||0)/Math.max(1,h*2.2));tp+=(sc-tp)*(rm?1:.05);
+  cam(sec*.028+tp*1.1+mxx*.35,(w<700?.55:.42)+tp*.28-myy*.12+Math.sin(sec*.2)*.025);
+  cx=w*.5;cy=h*(w<700?.46:.5)-tp*h*.06;
+  x.clearRect(0,0,w,h);
+  /* zodiac wheel (sidereal rashi ring) */
+  ring(ZR,0,"245,176,74",.12,.36,1.4);ring(ZR-.06,0,"245,176,74",.06,.18,1);
+  x.beginPath();x.strokeStyle="rgba(245,176,74,.26)";x.lineWidth=1;
+  for(j=0;j<12;j++){var a=j*Math.PI/6;proj(Math.cos(a)*(ZR-.06),0,Math.sin(a)*(ZR-.06));x.moveTo(PX,PY);proj(Math.cos(a)*(ZR+.012),0,Math.sin(a)*(ZR+.012));x.lineTo(PX,PY)}
+  if(!lowQ)for(j=0;j<27;j++){var b=j*TAU/27;proj(Math.cos(b)*(ZR-.06),0,Math.sin(b)*(ZR-.06));x.moveTo(PX,PY);proj(Math.cos(b)*(ZR-.03),0,Math.sin(b)*(ZR-.03));x.lineTo(PX,PY)}
+  x.stroke();
+  /* graha orbits */
+  for(j=0;j<G.length;j++){p=G[j];if(p.k==="ke")continue;ring(p.r,p.inc,p.rgb,.07,p.node?.34:.24,1,p.node?[3,7]:null)}
+  /* positions */
+  for(j=0;j<items.length;j++){it=items[j];
+   if(it.t===0){p=it.p;var th=(base[p.k]+rate[p.k]*days)*Math.PI/180,z0=Math.sin(th)*p.r;proj(Math.cos(th)*p.r,-z0*Math.sin(p.inc),z0*Math.cos(p.inc))}
+   else if(it.t===1){proj(0,0,0)}
+   else{var t2=(it.i*30+15)*Math.PI/180;proj(Math.cos(t2)*(ZR+.09),0,Math.sin(t2)*(ZR+.09))}
+   it.sx=PX;it.sy=PY;it.z=PZ;it.f=PF}
+  /* Rahu-Ketu axis */
+  var ra=items[7],ke=items[8];x.beginPath();x.setLineDash([4,8]);x.strokeStyle="rgba(150,120,255,.32)";x.lineWidth=1;x.moveTo(ra.sx,ra.sy);x.lineTo(ke.sx,ke.sy);x.stroke();x.setLineDash([]);
+  items.sort(byZ);
+  for(j=0;j<items.length;j++){it=items[j];if(it.t===2)dLabel(it);else dPlanet(it)}
+ }
+ function frame(ts){
+  raf=0;if(!ready)init();
+  if(!rm)raf=requestAnimationFrame(frame);
+  if(document.hidden||(document.body&&document.body.classList.contains("fsb")))return;
+  var dt=ts-last;if(!rm&&w<700&&dt<26)return;last=ts;
+  if(!rm){if(dt>40&&dt<500){if(++slow>45&&!lowQ){lowQ=true;size()}}else if(slow>0)slow--}
+  draw(ts)}
+ size();addEventListener("resize",size,{passive:true});
+ raf=requestAnimationFrame(frame);
 })();
 var cv=document.getElementById("stars"),cx=cv.getContext("2d"),W,H,st=[],mx=0,my=0;
 function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener("resize",rs);
@@ -565,20 +717,20 @@ var log=document.getElementById("log"),q=document.getElementById("q"),send=docum
 var hist=[],busy=false;
 ["c1","c2","c3","c4","c5"].forEach(function(k){var b=document.createElement("button");b.className="chip";b.dataset.t=k;b.onclick=function(){q.value=b.textContent;go()};chips.appendChild(b)});
 
-var AV='<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="url(#sp)" stroke="#ffe0a0" stroke-opacity=".6"/><text x="20" y="27.5" text-anchor="middle" font-size="22" fill="#4a1d05" font-family="Tiro Devanagari Hindi,serif">ॐ</text></svg>';
+var AV='<svg viewBox="0 0 48 48"><defs><radialGradient id="avg" cx="34%" cy="28%" r="82%"><stop offset="0" stop-color="#fff6d0"/><stop offset=".3" stop-color="#ffc861"/><stop offset=".72" stop-color="#e0862b"/><stop offset="1" stop-color="#7a3512"/></radialGradient><linearGradient id="avr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9b0"/><stop offset="1" stop-color="#b85a22"/></linearGradient></defs><circle cx="24" cy="24" r="22.6" fill="#1a1230" stroke="url(#avr)" stroke-width="1.5"/><circle cx="24" cy="24" r="19.4" fill="url(#avg)"/><ellipse cx="18" cy="14" rx="9.5" ry="5" fill="#fff" opacity=".3" transform="rotate(-24 18 14)"/><text x="24.6" y="32.4" text-anchor="middle" font-size="22" font-family="Tiro Devanagari Hindi,serif" fill="#2a0f03" opacity=".4">ॐ</text><text x="24" y="31.4" text-anchor="middle" font-size="22" font-family="Tiro Devanagari Hindi,serif" fill="#5a2306">ॐ</text><text x="23.6" y="30.9" text-anchor="middle" font-size="22" font-family="Tiro Devanagari Hindi,serif" fill="#ffe7b0" opacity=".35">ॐ</text></svg>';
 document.querySelectorAll(".chead .av").forEach(function(e){e.innerHTML=AV});
 function add(cls,txt){var r=document.createElement("div");r.className="row r"+cls;var d=document.createElement("div");d.className="msg "+cls;if(cls==="bot"){var a=document.createElement("div");a.className="av";a.innerHTML=AV;r.appendChild(a);var w=document.createElement("span");w.className="who";w.textContent="Mahatma";d.appendChild(w)}var t=document.createElement("span");t.textContent=txt;d.appendChild(t);r.appendChild(d);log.appendChild(r);log.scrollTop=log.scrollHeight;return t}
 function inl(x){return x.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/(^|[^*])\*(?!\s)([^*]+?)\*(?!\*)/g,"$1<em>$2</em>")}
 function md(t){if(((t.match(/\*\*/g)||[]).length)%2)t+="**";t=t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");var o="",ls=t.split("\n"),li=null;function cl(){if(li){o+="</"+li+">";li=null}}
 ls.forEach(function(l){var m=l.match(/^\s*[-*•]\s+(.*)/),n=l.match(/^\s*\d+[.)]\s+(.*)/),h=l.match(/^#{1,4}\s+(.*)/);if(m||n){var tg=m?"ul":"ol";if(li!==tg){cl();o+="<"+tg+">";li=tg}o+="<li>"+inl(m?m[1]:n[1])+"</li>"}else{cl();if(h)o+="<p><strong>"+inl(h[1])+"</strong></p>";else if(l.trim())o+="<p>"+inl(l)+"</p>"}});cl();return o}
 function typer(out){var tgt="",n=0,tm=null,done=null,fin=false;
-function nextCut(){if(n>=tgt.length)return tgt.length;var max=Math.min(tgt.length,n+24),i=n;while(i<max&&tgt.charAt(i)!==" ")i++;if(i<max)return i+1;return max}
+function nextCut(){if(n>=tgt.length)return tgt.length;var max=Math.min(tgt.length,n+48),i=n;while(i<max&&tgt.charAt(i)!==" ")i++;if(i<max)return i+1;return max}
 function tick(){if(n>=tgt.length){tm=null;if(fin&&done)done();return}
  var cut=nextCut();
  n=cut;
  out.innerHTML=md(tgt.slice(0,n));
  log.scrollTop=log.scrollHeight;
- var c=tgt.charAt(n-1),delay=/[.!?।]/.test(c)?110:/[,;:]/.test(c)?55:c==="\n"?75:28;
+ var c=tgt.charAt(n-1),delay=/[.!?।]/.test(c)?45:/[,;:]/.test(c)?22:c==="\n"?30:10;
  tm=setTimeout(tick,delay)}
 return{set:function(t){out.classList.add("md");tgt=t;if(!tm)tick()},finish:function(){fin=true;return new Promise(function(r){done=r;if(!tm)tick()})},cancel:function(){clearTimeout(tm);tm=null;out.classList.remove("md")}}}
 function hasBirthDetails(){return !!(gid("dob").value.trim()&&gid("tob").value.trim()&&gid("pob").value.trim())}
@@ -680,27 +832,51 @@ document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function
 function ctx(){var v=function(id){return gid(id).value.trim()||"nahi bataya"};return "Naam: "+v("nm")+"; Janm tithi: "+v("dob")+"; Janm samay: "+v("tob")+"; Janm sthan: "+v("pob")+"; Bhasha: "+LN[lang]+"\n\nKUNDLI DATA (asli ganit se): "+(CH?CH.facts:"UPLABDH NAHI - user ne janm vivaran poora nahi diya.")+"\n\nAaj ki date: "+new Date().toISOString().slice(0,10)}
 var SYS="Tum 'Mahatma' ho, askmahatma.in ka anubhavi Vedic (Parashari) jyotishi aur ek behad gyani AI sahayak. Jyotish tumhara mukhya kaam hai, par user koi bhi doosra vishay (padhai, code, career, business, sehat ki general jaankari, general knowledge) puchhe to bhi ek saaf, sahi aur poora jawab do, jaise ek behtareen AI assistant deta hai. JYOTISH KE NIYAM: neeche 'KUNDLI DATA' mein asli ganit se nikli graho ki sthiti, lagna, nakshatra, dasha aur gochar (transit) di gayi hai. Sirf wahi data satya maano; graho, rashi, bhav ya dasha ki koi sthiti apni taraf se mat banao. Har jyotish jawab mein data ke hisab se kaaran batao (jaise 'Shani 10ve bhav mein hai, isliye...'), phir vyavaharik nishkarsh aur saral upay do. Agar KUNDLI DATA uplabdh nahi hai ya Lagna nahi nikla, to saaf kaho kis jaankari ki zaroorat hai (tithi, samay, sthan) aur sirf utna batao jo data se ho sake; andaza mat lagao. Bhavishyavani sambhavna ki bhasha mein do ('yog hain', 'is dasha mein sambhavna hai'), kabhi pakki nahi; dar, kala jaadu ya mehnge anushthan ki salah mat do. Swasthya, kanoon, paise ya mansik sehat ke mamle mein kaho ki jyotish sirf margdarshan hai aur yogya visheshagya se milein. Har bade jyotish jawab ke ant mein ek chhoti pankti mein yaad dilao ki faisle apni samajh se lein, sirf jyotish par nirbhar na rahein. Likhne ka dhang: chhote paragraph, zarurat par '- ' wali bullets, sirf 2-3 mukhya shabd **bold** mein, koi heading nahi, emoji nahi (bas shuruaat mein ek 🙏 chalega), shaant aur bharosemand lahja. BHASHA NIYAM (sabse zaroori): jawab HAMESHA usi bhasha mein likho jo USER PROFILE ke 'Bhasha' mein likhi hai (English = poora jawab English mein; Hindi = Devanagari script mein Hindi; Hinglish = Roman script mein Hindi), chahe user sawal kisi bhi bhasha mein likhe. User ki bhasha dekhkar jawab ki bhasha mat badlo; sirf tab badlo jab 'Bhasha' badle. Jyotish jawab 220 shabd tak.";
 
+var QG=/^(hi+|hii+|hello+|hey+|hlo+|helo|namaste|namaskar|pranam|pranaam|ram ram|radhe radhe|jai shri ram|good (morning|afternoon|evening|night)|नमस्ते|नमस्कार|हेलो|हैलो|प्रणाम|राम राम)$/i,QT=/^(thanks?|thank you|thanx|thx|dhanyavad|dhanyawad|shukriya|ok|okay|theek hai|thik hai|धन्यवाद|शुक्रिया|ठीक है)$/i;
+var QA={g:["Namaste! I'm Mahatma, your Vedic astrology guide. Ask me anything about career, marriage, money or health. For a personal reading, add your date, time and place of birth on the left.","नमस्ते! मैं महात्मा हूँ, आपका वैदिक ज्योतिष मार्गदर्शक। करियर, विवाह, धन या स्वास्थ्य, कुछ भी पूछिए। निजी फलादेश के लिए बाईं ओर अपनी जन्म तिथि, समय और स्थान भरिए।","Namaste! Main Mahatma hoon, aapka Vedic jyotish margdarshak. Career, vivah, dhan ya sehat, kuch bhi puchhiye. Personal jawab ke liye left side mein apni janm tithi, samay aur sthan bharein."],t:["You're welcome! Ask me anything else whenever you like.","आपका स्वागत है! जब चाहें कुछ और पूछिए।","Aapka swagat hai! Jab chahein kuch aur puchhiye."]};
+function quick(t){var s=t.replace(/[!.,?।\s]+$/g,"").replace(/^\s+/,"");if(s.length>26)return null;if(QG.test(s))return QA.g[LI[lang]];if(QT.test(s))return QA.t[LI[lang]];return null}
+async function post(payload){
+ for(var a=0;a<2;a++){
+  var c=new AbortController(),tm=setTimeout(function(){c.abort()},30000);
+  try{var r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),signal:c.signal});clearTimeout(tm);
+   var d=await r.json().catch(function(){return{}});
+   if(r.ok&&d.text)return d;
+   if(r.status===429||a)throw{code:r.status===429?"rate_limited":"server",message:(d.error||"")+" (HTTP "+r.status+")"};
+  }catch(e){clearTimeout(tm);if(e&&e.code)throw e;if(a)throw{code:"server",message:String(e)}}
+  await new Promise(function(z){setTimeout(z,600)})}}
 async function go(){
  var t=q.value.trim();if(!t||busy)return;donePick();startFree();q.value="";add("me",t);chips.style.display="none";
+ var qr=quick(t);if(qr){add("bot",qr);hist.push({role:"user",content:t},{role:"assistant",content:qr});q.focus();return}
+ var fast=!hasBirthDetails();
  busy=true;send.disabled=true;send.classList.add("busy");
- var out=add("bot","");var th=think(out),ty=typer(out);
+ var out=add("bot",""),th,ty;
+ if(fast){out.innerHTML='<span class="d3"><i></i><i></i><i></i></span>';th={stop:function(){}};ty={cancel:function(){}}}else{th=think(out);ty=typer(out)}
  try{
-  var turns=hist.slice(-8);
+  var turns=hist.slice(fast?-4:-8);
   var loc=city(gid("pob").value)||null;
-  var payload={message:t+"\n\n[Note: write your whole reply only in "+LR[lang]+", whatever language the question above is written in.]",history:turns,system:SYS,profile:{name:gid("nm").value.trim(),dob:gid("dob").value,tob:gid("tob").value,pob:gid("pob").value,language:LN[lang],lat:loc?loc[0]:null,lon:loc?loc[1]:null},kundli:CH?CH.facts:null};
-  var controller=new AbortController(),timer=setTimeout(function(){controller.abort()},45000);
-  var r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload),signal:controller.signal});
-  clearTimeout(timer);
-  var data=await r.json().catch(function(){return{}});
-  if(!r.ok||!data.text)throw {code:r.status===429?"rate_limited":"server",message:(data.error||"")+" (HTTP "+r.status+")"};
-  th.stop();out.classList.add("stream");ty.set(data.text);await ty.finish();out.classList.remove("stream");
+  var payload={message:t+"\n\n[Note: write your whole reply only in "+LR[lang]+", whatever language the question above is written in.]"+(fast?" [Keep this reply short, under 120 words, warm and clear. If useful, invite the user to fill date, time and place of birth on the left for a personal reading.]":""),fast:fast,history:turns,system:SYS,profile:{name:gid("nm").value.trim(),dob:gid("dob").value,tob:gid("tob").value,pob:gid("pob").value,language:LN[lang],lat:loc?loc[0]:null,lon:loc?loc[1]:null},kundli:CH?CH.facts:null};
+  var data=await post(payload);
+  th.stop();
+  if(fast){out.classList.add("md");out.innerHTML=md(data.text);log.scrollTop=log.scrollHeight}
+  else{out.classList.add("stream");ty.set(data.text);await ty.finish();out.classList.remove("stream")}
   hist.push({role:"user",content:t},{role:"assistant",content:data.text});
- }catch(e){th.stop();ty.cancel();out.classList.remove("stream");
+ }catch(e){console.warn("chat error",e);th.stop();ty.cancel();out.classList.remove("stream");
   out.textContent=T(e&&e.code==="rate_limited"?"e2":"e3");out.classList.add("error");}
  busy=false;send.disabled=false;send.classList.remove("busy");q.focus();
 }
 send.onclick=go;q.addEventListener("keydown",function(e){if(e.key==="Enter")go()});
 apply();
+})();
+</script>
+<script>
+(function(){
+ var rm=matchMedia("(prefers-reduced-motion:reduce)").matches,sec=document.getElementById("chat"),qi=document.getElementById("q");
+ document.querySelectorAll('a[href="#chat"]').forEach(function(a){a.addEventListener("click",function(e){
+  e.preventDefault();sec.scrollIntoView({behavior:rm?"auto":"smooth",block:"start"});
+  if(!matchMedia("(pointer:coarse)").matches)setTimeout(function(){try{qi.focus({preventScroll:true})}catch(_){}},rm?0:700)})});
+ if(!rm&&"IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+  document.querySelectorAll(".how,h2.big,footer").forEach(function(el){el.classList.add("rv");io.observe(el)})}
 })();
 </script>
 </body>
